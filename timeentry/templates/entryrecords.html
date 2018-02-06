@@ -1,0 +1,73 @@
+{% extends "includes/timeentry_base.html" %}
+{% block title %} TimeEntry {% endblock %}
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-app="myapp" ng-controller="myctl">
+	
+     <h1 class="page-header">Time Card Entry</h1>
+
+          {% if messages %}
+        	<ul class="messages">
+            	{% for message in messages %}
+                <li class="{{ message.tags }}">
+                    {{ message|safe }}
+                    <a href="#" class="close">×</a>
+                </li>
+            	{% endfor %}
+        	</ul>
+    		{% endif %}
+    
+    		
+    <form class="form-inline">
+    	<div class="form-group">
+    		<label>Start Date</label>
+    		<input type="date" class="form-control" ng-model="startdate">
+    	</div>
+    	<div class="form-group">
+    		<label>End Date</label>
+    		<input type="date" class="form-control" ng-model="enddate">
+    	</div>
+    	<button class="btn btn-default" ng-click="query()">QUERY</button>
+    
+    </form>    
+    {% verbatim %}
+    
+    	your input: {{period}} <hr>
+    	Get result amount: {{count}} <hr>
+    	Get error: {{error}} <hr>
+    
+    {% endverbatim %}  
+    
+    <h2 class="sub-header"></h2>
+	<h2 class="sub-header">Time Entry Records</h2>
+	
+	<div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>labtransid</th>
+                  <th>laborcode</th>
+                  <th>enterdate</th>
+                  <th>refwo</th>
+                  <th>craft</th>
+                  <th>regularhrs</th>
+                  <th></th>
+                </tr>
+              </thead>
+              {% verbatim %}
+              <tbody>
+                <tr ng-repeat="x in records">
+                  <td>{{x.labtransid}}</td>
+                  <td>{{x.laborcode}}</td>
+                  <td>{{x.enterdate}}</td>
+                  <td>{{x.refwo}}</td>
+                  <td>{{x.craft}}</td>
+                  <td>{{x.regularhrs}}</td>
+                  <td><button class="btn btn-primary btn-xs" ng-click="querydetail()">Detail</button></td>
+                </tr>
+              </tbody>
+              {% endverbatim %} 
+            </table>
+            
+     </div>
+</div>
+{% endblock %}

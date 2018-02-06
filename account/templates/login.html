@@ -1,0 +1,42 @@
+{% extends "includes/account_base.html" %}
+{% block title %} User Login {% endblock %}
+{% block content %}
+	
+		
+		<div class="container">
+		
+			{% if loginform.errors %}
+			
+				<p id="erroralarm">
+				
+					Please correct the error {{loginform.errors|pluralize}} below!
+				
+				</p>
+			
+			{% endif %}
+			
+			<form action="" method="post" class="form-signin">
+				<h2 class="form-signin-heading">Please sign in</h2>
+			
+				
+				{% for field in loginform %}
+				<fieldset class="control-group">
+    			<label class="form-signin" for="id_{{ field.name }}">{{ field.label }}</label>
+    			<div class="form-signin">
+        			{{ field }}
+        			<p class="help-text">{{ field.help_text }} </p>
+    			</div>
+				</fieldset>
+				{% endfor %}
+				{% csrf_token %}
+				<input class="btn btn-lg btn-primary btn-block" type="submit" name="login" value="login">
+			
+			</form>
+		
+		</div>
+		
+		<div id="protocoldiv" style="display:none"></div>
+		<div id="logoimg" ></div>
+	
+	
+{% endblock %}
